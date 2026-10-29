@@ -15,6 +15,8 @@ const css = `
   th, td { text-align: left; padding: .35rem .75rem .35rem 0; border-bottom: 1px solid var(--line); }
   th { color: var(--mute); font-weight: normal; }
   .warn { color: var(--warn); }
+  .retry-mark { color: var(--warn); font-weight: bold; }
+  .failure-mark { color: var(--warn); font-weight: bold; text-decoration: underline; }
   .mute { color: var(--mute); }
 `;
 
