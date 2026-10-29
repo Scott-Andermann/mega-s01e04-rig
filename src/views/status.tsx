@@ -1,5 +1,4 @@
 import type { Status } from '../status.js';
-import { readNight } from '../digest/reader.js';
 
 export function StatusBoard({ status }: { status: Status }) {
   return (
@@ -20,18 +19,12 @@ export function StatusBoard({ status }: { status: Status }) {
         <p class="mute">nothing in runs/</p>
       ) : (
         <ul>
-          {status.nights.map((night) => {
-            const digest = readNight('runs', night);
-            const ok = digest?.rows.filter((row) => row.lastStatus === 'ok').length ?? 0;
-            const retries = digest?.rows.reduce((total, row) => total + row.retries, 0) ?? 0;
-            const failures = digest?.rows.filter((row) => row.hasFailure).length ?? 0;
-            return (
+          {status.nights.map(({ night, ok, retries, failures }) => (
               <li>
                 <a href={`/digest/${night}`}>{night}</a>
                 <span class="mute"> · ok {ok} · retry {retries} · fail {failures}</span>
               </li>
-            );
-          })}
+          ))}
         </ul>
       )}
     </>
